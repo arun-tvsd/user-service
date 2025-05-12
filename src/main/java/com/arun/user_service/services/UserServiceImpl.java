@@ -20,7 +20,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User getUserProfile(String username) throws UserNotFoundException {
-        User getUser = userRepository.findByUsername(username);
+        User getUser = userRepository.findByUsername(username).get();
         if (getUser == null)
             throw new UserNotFoundException("User not found!");
         return getUser;
@@ -42,7 +42,7 @@ public class UserServiceImpl implements IUserService {
             User newUser = userRepository.save(user);
             return newUser;
         } catch (DataIntegrityViolationException e) {
-            throw new IllegalArgumentException("Username or email is already present!");
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
