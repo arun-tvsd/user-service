@@ -13,5 +13,6 @@ import com.arun.user_service.models.User;
 public interface TokenRepository extends JpaRepository<Token, Long> {
     Optional<Token> findByToken(String token);
     List<Token> findByUser(User user);
+    void deleteByUser(User deleteUser);
 }
 
